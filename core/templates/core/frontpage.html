@@ -1,0 +1,94 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Home | {% endblock %}
+
+{% block content %}
+    <section class="hero">
+       
+        <div class="hero-body">
+            <div class="container">
+                <section class="section">
+                    <div class="columns">
+                        <div class="column is-8 is-offset-2">
+                            {% for post in posts %}
+                                <div class="content is-medium">
+                                    <a href="{% url 'post_detail' post.category.slug post.slug %}">
+                                        {% if post.image %}
+                                            <figure class="image">
+                                                <img src="{{ post.image.url }}">
+                                            </figure>
+                                        {% endif %}
+
+                                        <h2 class="subtitle is-4">{{ post.created_at|timesince }} ago</h2>
+                                        <h1 class="title">{{ post.title }}</h1>
+                                        <p>{{ post.intro }}</p>
+                                    </a>
+                                    <button class="like-button" data-post-id="{{ post.id }}">Like</button>
+                                <span class="like-count">{{ post.likes }}</span>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+
+    {% csrf_token %}
+
+    <script>
+     
+  
+
+$(document).ready(function() {
+    $('.like-button').click(function() {
+        var postId = $(this).data('post-id');
+        var csrftoken = getCookie('csrftoken');
+        $.ajax({
+            type: 'POST',
+            url: '{% url "post_like" post_id=0 %}'.replace('0', postId),
+            data: {'csrfmiddlewaretoken': csrftoken},
+            dataType: 'json',
+            // success: function(data) {
+            //     // Update the like count element with the new value
+            //     $('.like-count[data-post-id=' + postId + ']').text(data.likes);
+            // }
+            success: function(data) {
+                // Select the like count element that corresponds to the clicked button
+                var likeCount = $('.like-button[data-post-id=' + postId + ']').siblings('.like-count');
+                // Update the like count with the new value
+                likeCount.text(data.likes);
+            }
+
+            
+
+
+        });
+    });
+});
+
+
+
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+
+
+
+
+        </script>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Data Forms {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'index/HurlUI.css' %}">
+    <link rel="stylesheet" href="{% static 'index/style.css' %}">
+    <script src = "{% static 'index/index.js' %}" defer></script>
+<script src="{% static 'lib/cookie.min.js' %}" defer></script>
+    {% block script %}
+    {% endblock %}
+</head>
+
+<body>
+    <div class="container-fluid"> 
+
+        <div class="topnav nav-effect">
+            <div class="nav-padding">
+                <span class="nav-ham" id="nav-ham">&#9776;</span>
+                <a href = "/"> <img src = "{% static 'Icon/icon.png' %}" alt = "Data Forms Icon" class="navbar-icon form-icon" title = "Forms">  </a>
+                <!-- <span class="nav-text" title = "Forms"><a href = "{% url 'index' %}" class="nav-link">Home</a></span> -->
+                {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}">
+                    <img src = "{% static 'Icon/Logout.jpg' %}" alt = "Logout Icon" class="navbar-icon float-right logout-icon" title = "Logout">
+                    
+                </a>
+                {% else %}
+                <a href="{% url 'login' %}">  <img src = "{% static 'Icon/Login.png' %}" alt = "Login Icon" class="navbar-icon float-right login-icon" title = "Login">
+                    
+                   
+                </a>
+
+                {% endif %}
+            </div>
+        </div>
+        <div class="sidebar" id = "sidebar">
+            <span class="close-sidebar" id="close-sidebar">&times;</span>
+            <div class="sidebar-content">
+                <h4 class="sidebar-title">
+                    <a href = "{% url 'index' %}" class="sidebar-title-link">
+                        <span>Data Forms</span>
+                    </a>
+                </h4>
+                    <!-- <a class="nav-link" href="/blog">ICDS Blog</a>
+                -->
+                 <!--
+                <p class="text-label">Found bug? Submit an issue <a href="" class="link">here</a></p> -->
+           </div>
+        </div>
+    </div>       
+    {% block body %}
+    
+    {% endblock %}
+</body>
+</html>

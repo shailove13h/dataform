@@ -1,0 +1,42 @@
+{% extends 'index/layout.html' %}
+{% block body %}
+<div class="container">
+    <form class="box box-shadow margin-top-bottom" method="POST" action = "{% url 'login' %}">
+        <div class="form-group">
+            <h1 class="box-title">Login user</h1>            <p class="form-error"> {{ message}}</p>
+            
+            {% csrf_token %}
+        </div>
+        <div class="form-group form-animate">
+            <p class="form-label">Username</p>
+            <input type="text" class="input-animate" required name="username">
+            <span class="input-onFocus"></span>
+        </div>
+        <div class="form-group form-animate">
+            <p class="form-label">Password:</p>
+            <input type="password" name="password" class="input-animate" required>
+            <span class="input-onFocus"></span>
+        </div>
+        <div class="form-group">
+            <p class="form-label">Don't have account yet? <a class="link" href = "{% url 'register' %}">Register</a></p>
+            <input type="submit" value="Login" class="btn btn-dark form-control">
+        </div>
+    </form>
+
+
+    <div class="container">
+        <div class="box box-shadow margin-top-bottom">
+		<h2>About Us</h2>
+		<p>We are a team of developers who have created a Data form application for the ICDS Department in Gujarat. Our goal is to make it easier for supervisors, Block Level Staff and District Level staff to collect data from anganwadi workers and compile it at the district level.</p>
+		<p>With our application, supervisors can create a data form with select options based on previous selections, making it easier to filter data. They can also add short questions related to anganwadi workers and their beneficiaries, as well as date, mobile number, and aadhar fields. Once the form is complete, they can send a link to the anganwadi workers to fill in the information.</p>
+		<p>Our application is designed to reduce the burden of data entry at the sector and block level, and make it easier for district-level staff to compile data. With more than 57,000 anganwadi workers in Gujarat, our application will save supervisors time and effort.</p>
+	
+	<footer>
+		<p>&copy; 2023 Data with SV</p>
+	</footer>
+    </div>
+    </div>
+</div>
+
+
+{% endblock %}
