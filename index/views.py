@@ -97,84 +97,23 @@ def view_data(request, code):
             
                 if answer:
                     
-                    if question.question_type == "districts" :
-                        anscheck = answer.answer
-                        # choice = answer.answer_to.choices.get(id = answer.answer).choice
-                        if answer.answer !="":
+                    # if question.question_type == "districts" :
+                    #     anscheck = answer.answer
+                    #     # choice = answer.answer_to.choices.get(id = answer.answer).choice
+                    #     if answer.answer !="":
 
-                            choice = District.objects.filter(id=answer.answer).first()
-                        else:
-                            choice = District.objects.filter(id=0).first()
-                        row.append(str(choice))
-                        exportrow.append(str(choice))
+                    #         choice = District.objects.filter(id=answer.answer).first()
+                    #     else:
+                    #         choice = District.objects.filter(id=0).first()
+                    #     row.append(str(choice))
+                    #     exportrow.append(str(choice))
 
-                    elif question.question_type == "talukas":
-                
-                        if answer.answer !="":
+                    # elif question.question_type == "talukas":
+            
 
-                            choice = Taluka.objects.filter(id=answer.answer).first()
-                        else:
-                            choice = Taluka.objects.filter(id=0).first()
-                        row.append(str(choice))
-                        exportrow.append(str(choice))
+                    
                         
-                    elif question.question_type == "blocks":
-                
-                        if answer.answer !="":
-
-                            choice = Block.objects.filter(id=answer.answer).first()
-                        else:
-                            choice =""
-                        row.append(str(choice))
-                        exportrow.append(str(choice))
-                        
-
-                    elif question.question_type == "sectors":
-                
-                        if answer.answer !="":
-
-                            choice = Sector.objects.filter(id=answer.answer).first()
-                        else:
-                            choice =""
-                        row.append(str(choice))
-                        exportrow.append(str(choice))
-                        
-                    elif question.question_type == "villages":
-                
-                        if answer.answer !="":
-
-                            choice = Village.objects.filter(id=answer.answer).first()
-                        else:
-                            choice =""
-                        row.append(str(choice))
-                        exportrow.append(str(choice))
-                        
-
-                    elif question.question_type == "awcs":
-                
-                        if answer.answer !="":
-
-                            choice = AWC.objects.filter(id=answer.answer).first()
-                        else:
-                            choice =""
-                        row.append(str(choice))
-                        exportrow.append(str(choice))
-
-                    elif question.question_type == "date":
-                
-                        choice = answer.answer
-
-                        print("date from databse")
-                        print(choice)
-                        choice  = re.sub(r'(\d{4})-(\d{1,2})-(\d{1,2})', '\\3-\\2-\\1', choice)
-                        # formatDate = datetime(choice)
-                        # formatDate = formatDate.strftime("%d/%B/%Y")
-                        # print("new date formqte from databse")
-                        # print(formatDate)
-                        row.append(str(choice))
-                        exportrow.append(str(choice))
-                        
-                    elif question.question_type == "picture":
+                    if question.question_type == "picture":
                 
                         # get the image data from the database
                         choice = answer.answer
@@ -214,50 +153,7 @@ def view_data(request, code):
                 
                 worksheet.cell(row=1, column=index+1, value=header)
 
-                
-            # for row_index, exportrow in enumerate(exportdata):
-            #     for column_index, cell in enumerate(exportrow):
-            #         print("printing cell")
-                    
-            #         if 'data:image/png;base64,' in cell:
-            #             print("we founde data64")
-                        
-            #             image_data = cell.split(',')[1]
-            #             decoded_image_data = base64.b64decode(image_data)
-
-                    
-            #             img = Image.open(BytesIO(decoded_image_data))
-            #             # add the image to the worksheet using drawing
-            #             drawing = worksheet.drawing
-            #             drawing.add(img)
-            #             worksheet.cell(row=row_index+2, column=column_index+1, value=drawing)
-            #         else :
-            #             worksheet.cell(row=row_index+2, column=column_index+1, value=cell)
-            # workbook.save(response)
-            # return response
-            # for row_index, exportrow in enumerate(exportdata):
-            #     for column_index, cell in enumerate(exportrow):
-            #         if 'data:image/png;base64,' in cell:
-            #             # decode the image data from base64
-            #             image_data = cell.split(',')[1]
-            #             decoded_image_data = base64.b64decode(image_data)
-                        
-            #             # create an image object from the decoded data
-            #             img = Image.open(BytesIO(decoded_image_data))
-                        
-            #             # add the image to the worksheet using drawing
-            #             drawing = XLImage(img)
-            #             drawing.width = 80 # adjust the size of the image as needed
-            #             drawing.height = 60
-            #             worksheet.add_image(drawing, f"{chr(column_index+65)}{row_index+2}") # add the image to the cell
-                        
-            #         else:
-            #             worksheet.cell(row=row_index+2, column=column_index+1, value=cell)
-
-
-
-            # workbook.save(response)
-            # return response
+          
 
             for row_index, exportrow in enumerate(exportdata):
                 for column_index, cell in enumerate(exportrow):
@@ -315,21 +211,7 @@ def home(request):
     return render(request, "index/index.html", {
         "forms": forms
     })
-# def blockes(request,code):
-#     blockes = Block.objects.all()
-#     context = {'blockes' : blockes,'form': formInfo,'code': code,
-#           }
-    
-#     # district_id = request.GET.get('district')
-#     # blockes = Block.objects.filter(district_id=district_id).order_by('name')
-#     # return render(request, 'hr/city_dropdown_list_options.html', {'blockes': blockes})
-#     formInfo = Form.objects.filter(code = code)
-#     return render(request, "index/block_dropdown_list_options.html", {
-#             "code": code,
-#             "form": formInfo,
-#             "blockes": blockes
 
-#         })
 
 
 
@@ -902,11 +784,17 @@ def talukas(request):
 
         data = request.GET.getlist(i)
         print("printing the id which is unkone name")
-        
+        print("here is name" + str(data))
     district= request.GET.get('districts')
-
+    print("printing dist name" + str(district))
     
-    taluka = Taluka.objects.filter(district= data[0])
+    # disID=District.objects.all().filter(name=data[0])
+    
+    district_id = District.objects.filter(name__in=data).values('id').first().get('id')
+
+    print(district_id)
+
+    taluka = Taluka.objects.filter(district= district_id)
     
     context = {"taluka" : taluka
           }
@@ -947,9 +835,10 @@ def blockes(request):
         data = request.GET.getlist(i)
         
         taluka= request.GET.get('talukas')
+        taluka_id = Taluka.objects.filter(name__in=data).values('id').first().get('id')
 
         
-        blockes = Block.objects.filter(taluka= data[0])
+        blockes = Block.objects.filter(taluka= taluka_id)
         
     context = {"blockes" : blockes
           }
@@ -987,9 +876,10 @@ def sectors(request):
         print("printing the id which is unkone name")
         print(data)
     block= request.GET.get('blocks')
+    block_id = Block.objects.filter(name__in=data).values('id').first().get('id')
 
     
-    sectors = Sector.objects.filter(block = data[0])
+    sectors = Sector.objects.filter(block = block_id)
     
     context = {"sectors" : sectors
           }
@@ -1027,9 +917,10 @@ def editvillages(request):
         print("printing the id which is unkone name")
         print(data)
     sectors= request.GET.get('sectors')
+    sectors_id = Sector.objects.filter(name__in=data).values('id').first().get('id')
 
     
-    villages = Village.objects.filter(block = data[0])
+    villages = Village.objects.filter(block = sectors_id)
     
     context = {"villages" : villages
           }
@@ -1048,9 +939,10 @@ def awcs(request):
         print("printing the id which is unkone name")
         print(data)
     sector= request.GET.get('sectors')
+    sectors_id = Sector.objects.filter(name__in=data).values('id').first().get('id')
 
     print(sector)
-    awcs = AWC.objects.filter(sector= data[0])
+    awcs = AWC.objects.filter(sector= sectors_id)
     print(awcs)
     context = {"awcs" : awcs
           }
@@ -1110,7 +1002,7 @@ def submit_form(request, code):
                 response.save()
         for i in request.POST:
             #Excluding csrf token
-            print(i)
+          
             if i == "csrfmiddlewaretoken" or i == "email-address":
                 continue
             if i=="districts":
@@ -1126,12 +1018,22 @@ def submit_form(request, code):
                 question = formInfo.questions.get(question_type = i)
             elif i=="picture":
                 question = formInfo.questions.get(question_type = i)
+            elif i=="date":
+                question = formInfo.questions.get(question_type = i)
+
+                
             else:
 
                 question = formInfo.questions.get(id = i)
                
             for j in request.POST.getlist(i):
-                
+                print(i)
+
+                if i =="date":
+                    print(j)
+                    j  = re.sub(r'(\d{4})-(\d{1,2})-(\d{1,2})', '\\3-\\2-\\1', j)
+                    print(j)
+
                 answer = Answer(answer=j, answer_to = question)
 
 
@@ -1188,7 +1090,7 @@ def responses(request, code):
             
             
         
-        elif question.question_type == "districts" :
+        elif question.question_type == "districts" or question.question_type == "talukas" or question.question_type == "blocks" or question.question_type == "sectors" or question.question_type == "villages" or question.question_type == "awcs":
             print("hello from district ansers")
             districtAnswered[question.question] = districtAnswered.get(question.question, {})
             
@@ -1199,79 +1101,79 @@ def responses(request, code):
                 else:
                 
 
-                    choice = District.objects.filter(id=answer.answer).first()
-                
+                    # choice = District.objects.filter(id=answer.answer).first()
+                    choice  = answer.answer
                 districtAnswered[question.question][choice] = districtAnswered.get(question.question, {}).get(choice, 0) + 1
             
-        elif question.question_type == "talukas" :
+        # elif question.question_type == "talukas" :
             
-            talukaAnswered[question.question] = talukaAnswered.get(question.question, {})
+        #     talukaAnswered[question.question] = talukaAnswered.get(question.question, {})
             
-            for answer in answers:
-                if answer.answer=="" :
+        #     for answer in answers:
+        #         if answer.answer=="" :
 
-                    choice = ""
-                else:
+        #             choice = ""
+        #         else:
                 
 
-                    choice = Taluka.objects.filter(id=answer.answer).first()
-                talukaAnswered[question.question][choice] = talukaAnswered.get(question.question, {}).get(choice, 0) + 1
+        #             choice = Taluka.objects.filter(id=answer.answer).first()
+        #         talukaAnswered[question.question][choice] = talukaAnswered.get(question.question, {}).get(choice, 0) + 1
             
-        elif question.question_type == "blocks" :
+        # elif question.question_type == "blocks" :
             
-            blockAnswered[question.question] = blockAnswered.get(question.question, {})
+        #     blockAnswered[question.question] = blockAnswered.get(question.question, {})
             
-            for answer in answers:
-                if answer.answer=="" :
+        #     for answer in answers:
+        #         if answer.answer=="" :
 
-                    choice = ""
-                else:
+        #             choice = ""
+        #         else:
                 
 
-                    choice = Block.objects.filter(id=answer.answer).first() 
-                blockAnswered[question.question][choice] = blockAnswered.get(question.question, {}).get(choice, 0) + 1
+        #             choice = Block.objects.filter(id=answer.answer).first() 
+        #         blockAnswered[question.question][choice] = blockAnswered.get(question.question, {}).get(choice, 0) + 1
             
-        elif question.question_type == "sectors" :
+        # elif question.question_type == "sectors" :
             
-            sectorAnswered[question.question] = sectorAnswered.get(question.question, {})
+        #     sectorAnswered[question.question] = sectorAnswered.get(question.question, {})
             
-            for answer in answers:
-                if answer.answer=="" :
+        #     for answer in answers:
+        #         if answer.answer=="" :
 
-                    choice = ""
-                else:
+        #             choice = ""
+        #         else:
                 
 
-                    choice = Sector.objects.filter(id=answer.answer).first()
-                sectorAnswered[question.question][choice] = sectorAnswered.get(question.question, {}).get(choice, 0) + 1
+        #             choice = Sector.objects.filter(id=answer.answer).first()
+        #         sectorAnswered[question.question][choice] = sectorAnswered.get(question.question, {}).get(choice, 0) + 1
             
-        elif question.question_type == "villages" :
-            print("hello from district ansers")
-            villageAnswered[question.question] = villageAnswered.get(question.question, {})
+        # elif question.question_type == "villages" :
+        #     print("hello from district ansers")
+        #     villageAnswered[question.question] = villageAnswered.get(question.question, {})
             
-            for answer in answers:
-                if answer.answer=="" :
+        #     for answer in answers:
+        #         if answer.answer=="" :
 
-                    choice = ""
-                else:
+        #             choice = ""
+        #         else:
                 
 
-                    choice = Village.objects.filter(id=answer.answer).first()
-                villageAnswered[question.question][choice] = villageAnswered.get(question.question, {}).get(choice, 0) + 1
+        #             choice = Village.objects.filter(id=answer.answer).first()
+        #         villageAnswered[question.question][choice] = villageAnswered.get(question.question, {}).get(choice, 0) + 1
             
-        elif question.question_type == "awcs" :
-            print("hello from awcAnswered ansers")
-            awcAnswered[question.question] = awcAnswered.get(question.question, {})
+        # elif question.question_type == "awcs" :
+        #     print("hello from awcAnswered ansers")
+        #     awcAnswered[question.question] = awcAnswered.get(question.question, {})
             
-            for answer in answers:
-                if answer.answer=="" :
+        #     for answer in answers:
+        #         if answer.answer=="" :
 
-                    choice = ""
-                else:
+        #             choice = ""
+        #         else:
                 
 
-                    choice = AWC.objects.filter(id=answer.answer).first()
-                awcAnswered[question.question][choice] = awcAnswered.get(question.question, {}).get(choice, 0) + 1
+        #             choice = AWC.objects.filter(id=answer.answer).first()
+        #         awcAnswered[question.question][choice] = awcAnswered.get(question.question, {}).get(choice, 0) + 1
             
         responsesSummary.append({"question": question, "answers":answers })
     for answr in choiceAnswered:
@@ -1287,27 +1189,27 @@ def responses(request, code):
         for choice in districtAnswered[answr]:
             answerResponsesSummary[answr][choice] = districtAnswered[answr][choice]
             
-    for answr in talukaAnswered:
-        answerResponsesSummary[answr] = {}
-        keys = talukaAnswered[answr].values()
-        for choice in talukaAnswered[answr]:
-            answerResponsesSummary[answr][choice] = talukaAnswered[answr][choice]
+    # for answr in talukaAnswered:
+    #     answerResponsesSummary[answr] = {}
+    #     keys = talukaAnswered[answr].values()
+    #     for choice in talukaAnswered[answr]:
+    #         answerResponsesSummary[answr][choice] = talukaAnswered[answr][choice]
             
-    for answr in blockAnswered:
-        answerResponsesSummary[answr] = {}
-        keys = blockAnswered[answr].values()
-        for choice in blockAnswered[answr]:
-            answerResponsesSummary[answr][choice] = blockAnswered[answr][choice]
-    for answr in sectorAnswered:
-        answerResponsesSummary[answr] = {}
-        keys = sectorAnswered[answr].values()
-        for choice in sectorAnswered[answr]:
-            answerResponsesSummary[answr][choice] = sectorAnswered[answr][choice]
-    for answr in awcAnswered:
-        answerResponsesSummary[answr] = {}
-        keys = awcAnswered[answr].values()
-        for choice in awcAnswered[answr]:
-            answerResponsesSummary[answr][choice] = awcAnswered[answr][choice]
+    # for answr in blockAnswered:
+    #     answerResponsesSummary[answr] = {}
+    #     keys = blockAnswered[answr].values()
+    #     for choice in blockAnswered[answr]:
+    #         answerResponsesSummary[answr][choice] = blockAnswered[answr][choice]
+    # for answr in sectorAnswered:
+    #     answerResponsesSummary[answr] = {}
+    #     keys = sectorAnswered[answr].values()
+    #     for choice in sectorAnswered[answr]:
+    #         answerResponsesSummary[answr][choice] = sectorAnswered[answr][choice]
+    # for answr in awcAnswered:
+    #     answerResponsesSummary[answr] = {}
+    #     keys = awcAnswered[answr].values()
+    #     for choice in awcAnswered[answr]:
+    #         answerResponsesSummary[answr][choice] = awcAnswered[answr][choice]
     
         
     #Checking if form creator is user
@@ -1371,6 +1273,7 @@ def response(request, code, response_code):
     })
 
 def edit_response(request, code, response_code):
+
     formInfo = Form.objects.filter(code = code)
     
     #Checking if form exists

@@ -24,11 +24,11 @@ from django.urls import path, include
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.views.generic.base import RedirectView
 
-from .sitemaps import CategorySitemap, PostSitemap
+from .sitemaps import CategorySitemap, PostSitemap, ManualSitemap
 
 from core.views import frontpage, about,blog, robots_txt
 
-sitemaps = {'category': CategorySitemap, 'post': PostSitemap}
+sitemaps = {'category': CategorySitemap, 'post': PostSitemap, 'manual': ManualSitemap}
 
 
 urlpatterns = [
@@ -36,7 +36,7 @@ urlpatterns = [
     path('', include('index.urls')),
     path('favicon.ico', RedirectView.as_view(url = staticfiles_storage.url('favicon.ico'))),
 
-    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},name='django.contrib.sitemaps.views.sitemap'),
     path('robots.txt', robots_txt, name='robots_txt'),
    
     path('about/', about, name='about'),

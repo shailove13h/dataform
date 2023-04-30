@@ -63,6 +63,15 @@ MIDDLEWARE = [
     
 ]
 
+SOCIAL_SHARE_PROVIDERS = (
+    'social_share.providers.email.EmailProvider',
+    'social_share.providers.facebook.FacebookProvider',
+    'social_share.providers.twitter.TwitterProvider',
+    'social_share.providers.instagram.InstagramProvider',
+    'social_share.providers.koo.KooProvider',
+)
+
+
 ROOT_URLCONF = 'form.urls'
 
 TEMPLATES = [
@@ -87,27 +96,27 @@ WSGI_APPLICATION = 'form.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases  freeforms
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 DATABASES = {
-        'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+# DATABASES = {
+#         'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-        'NAME': 'dataform',
+#         'NAME': 'dataform',
 
-        'USER': 'shailoveform',
+#         'USER': 'shailoveform',
 
-        'PASSWORD': '$Sd45371845',
+#         'PASSWORD': '$Sd45371845',
 
-        'HOST': 'localhost',
+#         'HOST': 'localhost',
 
-        'PORT': '',
-        }
-     }
+#         'PORT': '',
+#         }
+#      }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -151,8 +160,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-STATIC_ROOT = '/usr/local/lsws/Example/html/gitform/public/static'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = '/usr/local/lsws/Example/html/dataform/public/static'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Media files
 MEDIA_ROOT = BASE_DIR / 'media/'

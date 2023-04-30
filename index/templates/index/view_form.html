@@ -40,8 +40,12 @@
             <input input type="text" pattern="\d{12}" title="Please enter a 12-digit number" name="{{question.id}}" class="short-answer" placeholder = "Aadhar number" {% if question.required %} required {% endif %} required>
             
             {% elif question.question_type == "date" %}
-            <input type="date" "title="Please enter Date" name="{{question.id}}" class="short-answer" placeholder = "Date" {% if question.required %} required {% endif %} required>
+            <input type="date" "title="Please enter Date" name="date" class="short-answer" placeholder = "Date" {% if question.required %} required {% endif %} required>
             
+            {% elif question.question_type == "numbers" %}
+            <input input type="number"  title="Please enter Number" name="{{question.id}}" class="short-answer" placeholder = "Number" {% if question.required %} required {% endif %} required>
+            
+
             {% elif question.question_type == "paragraph" %}
                 <textarea name="{{question.id}}" placeholder="Your answer" class="long-answer textarea-adjust" {% if question.required %} required {% endif %}></textarea>
             {% elif question.question_type == "multiple choice" %}
@@ -71,7 +75,7 @@
                    hx-target="#talukas"> 
                     <option selected value="0"> Select District</option>
                     {% for d in districts %}
-                    <option value="{{ d.pk }}"> {{d.name }} </option>
+                    <option value="{{ d.name }}"> {{d.name }} </option>
                     {% endfor %}
                 </select>
 

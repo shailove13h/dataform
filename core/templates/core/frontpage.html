@@ -1,7 +1,7 @@
 {% extends 'core/base.html' %}
 
 {% block title %}Home | {% endblock %}
-
+{% load static %}
 {% block content %}
     <section class="hero">
        
@@ -23,8 +23,27 @@
                                         <h1 class="title">{{ post.title }}</h1>
                                         <p>{{ post.intro }}</p>
                                     </a>
-                                    <button class="like-button" data-post-id="{{ post.id }}">Like</button>
-                                <span class="like-count">{{ post.likes }}</span>
+                                    <button class="like-button" data-post-id="{{ post.id }}" class="fb-share-button">Like</button>
+                                    <span class="like-count">{{ post.likes }}</span>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}&title={{ blog.title }}&description={{ blog.description }}" class="fb-share-button">
+                                    Share on Facebook
+                                </a>
+                                <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ blog.title }}" class="twitter-share-button">
+                                    <img src="{% static 'icon/twitter.png' %}" alt="Share on Twitter">
+                                  </a>
+                                  
+                                <!-- Instagram share button -->
+                                <a href="https://www.instagram.com/share?url={{ request.build_absolute_uri }}&title={{ blog.title }}" class="instagram-share-button">
+                                    <img src="{% static 'images/instagram-icon.png' %}" alt="Share on Instagram">
+                                </a>
+                                
+                                <!-- Koo share button -->
+                                <a href="https://www.kooapp.com/share?url={{ request.build_absolute_uri }}&title={{ blog.title }}" class="koo-share-button">
+                                    <img src="{% static 'images/koo-icon.png' %}" alt="Share on Koo">
+                                </a>
+                                
+                                
+
                                 </div>
                             {% endfor %}
                         </div>
@@ -33,6 +52,42 @@
             </div>
         </div>
     </section>
+    <style>
+        .fb-share-button {
+      display: inline-block;
+      background-color: #3B5998;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 5px;
+      padding: 8px 15px;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .fb-share-button:hover {
+      background-color: #2d4373;
+    }
+    
+    .like-button {
+      display: inline-block;
+      background-color: #3B5998;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 5px;
+      padding: 8px 15px;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .like-button:hover {
+      background-color: #2d4373;
+    }
+    
+    </style>
 
     {% csrf_token %}
 

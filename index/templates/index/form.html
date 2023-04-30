@@ -90,6 +90,7 @@
                 <option value="sectors" {% if question.question_type == "sectors" %}selected{% endif %}>Sector</option>
                 <!-- <option value="villages" {% if question.question_type == "villages" %}selected{% endif %}>Village</option> -->
                 <option value="awcs" {% if question.question_type == "awcs" %}selected{% endif %}>AWC</option>
+                <option value="numbers" {% if question.question_type == "numbers" %}selected{% endif %}>Number</option>
                 <option value="short" {% if question.question_type == "short" %}selected{% endif %}>Short answer</option>
                 <option value="mobile" {% if question.question_type == "mobile" %}selected{% endif %}>Mobile Number</option>
                 <option value="aadhar" {% if question.question_type == "aadhar" %}selected{% endif %}>Aadhar Number</option>
@@ -163,6 +164,11 @@
             {% elif question.question_type == "aadhar" %}
             <div class="answers" data-id="{{question.id}}">
                 <input type ="text" class="short-answer" disabled placeholder="Aadhar Number text" />
+            </div>
+
+            {% elif question.question_type == "numbers" %}
+            <div class="answers" data-id="{{question.id}}">
+                <input type ="number" class="short-answer" disabled placeholder=" Number only Field" />
             </div>
             {% elif question.question_type == "paragraph" %}
             <div class="answers" data-id="{{question.id}}">

@@ -538,6 +538,12 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <textarea class="short-answer" disabled placeholder="Aadhar Number input" ></textarea>
                             </div>`
                                 this.parentNode.insertBefore(ele, this.parentNode.childNodes[4])
+                            }else if(this.value === "numbers"){
+                                let ele = document.createElement("div");
+                                ele.innerHTML = `<div class="answers" data-id="${this.dataset.id}">
+                                <textarea class="short-answer" disabled placeholder=" Number only input" ></textarea>
+                            </div>`
+                                this.parentNode.insertBefore(ele, this.parentNode.childNodes[4])
                             }else if(this.value === "date"){
                                 let ele = document.createElement("div");
                                 ele.innerHTML = `<div class="answers" data-id="${this.dataset.id}">
@@ -606,7 +612,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 <option value="blocks" >Block</option>
                 
                 <option value="sectors" >Sector</option>
-                <option value="awcs" >AWC</option>    
+                <option value="awcs" >AWC</option> 
+                <option value="numbers" >Number</option>     
                 <option value="short">Short answers</option>
                 <option value="mobile">Mobile Number</option>
                 <option value="aadhar">Aadhar Number</option>
